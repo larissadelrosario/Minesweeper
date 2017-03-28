@@ -10,6 +10,7 @@ public class MyPanel extends JPanel {
 	private static final int GRID_X = 25;
 	private static final int GRID_Y = 25;
 	private static final int INNER_CELL_SIZE = 29;
+	private char[] code = {'0','1','2','3','4','5','6','7','8'};
 	public static  int TOTAL_COLUMNS = 9;
 	public static int TOTAL_ROWS = 9;   //Last row has only one cell
 	public int x = -1;
@@ -18,6 +19,7 @@ public class MyPanel extends JPanel {
 	public int mouseDownGridY = 0;
 	public static Color[][] colorArray = new Color[TOTAL_COLUMNS][TOTAL_ROWS];
 	public static int[][] statusArray = new int[TOTAL_COLUMNS][TOTAL_ROWS];
+	public static int [][] minesArray = new int[TOTAL_COLUMNS][TOTAL_ROWS];
 	public MyPanel() {   //This is the constructor... this code runs first to initialize
 		if (INNER_CELL_SIZE + (new Random()).nextInt(1) < 1) {	//Use of "random" to prevent unwanted Eclipse warning
 			throw new RuntimeException("INNER_CELL_SIZE must be positive!");
@@ -34,12 +36,14 @@ public class MyPanel extends JPanel {
 			for (int y = 0; y < TOTAL_ROWS; y++) {
 				colorArray[x][y] = Color.WHITE;
 				statusArray[x][y] = 0;
+				minesArray[x][y] = 0;
 			}
 		}
 	}
 	public void paintComponent(Graphics g) {
+	
 		super.paintComponent(g);
-
+			
 		//Compute interior coordinates
 		Insets myInsets = getInsets();
 		int x1 = myInsets.left;
@@ -49,11 +53,11 @@ public class MyPanel extends JPanel {
 		int width = x2 - x1;
 		int height = y2 - y1;
 
+		
 		//Paint the background
 		g.setColor(Color.LIGHT_GRAY);
 		g.fillRect(x1, y1, width + 1, height + 1);
 		
-
 		//Draw the grid minus the bottom row (which has only one cell)
 		//By default, the grid will be 10x10 (see above: TOTAL_COLUMNS and TOTAL_ROWS) 
 		g.setColor(Color.BLACK);
@@ -67,16 +71,24 @@ public class MyPanel extends JPanel {
 		//Draw an additional cell at the bottom left
 //		g.drawRect(x1 + GRID_X, y1 + GRID_Y + ((INNER_CELL_SIZE + 1) * (TOTAL_ROWS-1)), INNER_CELL_SIZE + 1, INNER_CELL_SIZE + 1);
 
+		
 		//Paint cell colors
+
+		
 		for (int x = 0; x < TOTAL_COLUMNS; x++) {
 			for (int y = 0; y < TOTAL_ROWS; y++) {
 				if ((x == 0) || (y != TOTAL_ROWS)) {
 					Color c = colorArray[x][y];
 					g.setColor(c);
 					g.fillRect(x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 1, y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1)) + 1, INNER_CELL_SIZE, INNER_CELL_SIZE);
+					g.setColor(Color.BLACK);
+					if ( minesArray[x][y] != 0 ) {
+						g.drawChars(code,minesArray[x][y],1,x1 + GRID_X + (x * (INNER_CELL_SIZE + 1)) + 10,y1 + GRID_Y + (y * (INNER_CELL_SIZE + 1))+20);
+					}
 				}
 			}
 		}
+			
 	}
 	public  int getGridX(int x, int y) {
 		Insets myInsets = getInsets();

@@ -3,8 +3,7 @@ import java.awt.Component;
 import java.awt.Insets;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.util.Random;
-import java.awt.Graphics;
+
 
 import javax.swing.JFrame;
 
@@ -90,31 +89,7 @@ public class MyMouseAdapter extends MouseAdapter {
 			 System.out.println(" Grid Values " + MyPanel.MineArray[gridX][gridY]);
 									Grids NewGrid = new Grids(gridX,gridY);
 									NewGrid.CheckGrid(myPanel);
-//									if( MyPanel.MineArray[gridX][gridY]==0 || MyPanel.MineArray[gridX][gridY]==1  ){
-//										 myPanel.colorArray[gridX][gridY] = Color.BLACK;
-//										 myPanel.repaint();
-//										 // game over 
-//									}
-//									else{ 
-//										myPanel.colorArray[gridX][gridY] = Color.GRAY;
-//										myPanel.repaint();
-//									int flagcounter=0;
-//									
-//										 for(int i = -1; i <= 1; i++){
-//											 for(int u = -1; u <= 1; u++){		 
-//											 	//if( MyPanel.MineArray[gridX-1+i][gridY-1+u]==0 || MyPanel.MineArray[gridX-1+i][gridY-1+u]==1  )
-//												if(gridX+i>=0 && gridY+u>=0 && gridX+i<=8 && gridY+u<=8) {
-//												  if( MyPanel.MineArray[gridX+i][gridY+u]==0 || MyPanel.MineArray[gridX+i][gridY+u]==1 )	{
-//													 flagcounter = flagcounter + 1;
-//										
-//													 }
-//												 
-//												}
-//											}
-//									} 
-//										//myPanel.isPaintingForPrint(flagcounter);(flagcounter);
-//									 System.out.println(" flagcounter = "+ flagcounter);}
-									
+							
 								
 									break;		     
 			

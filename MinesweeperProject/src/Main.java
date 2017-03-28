@@ -5,8 +5,10 @@ public class Main {
 		JFrame myFrame = new JFrame("MineSweeper");
 		myFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		myFrame.setLocation(400, 150);
-		myFrame.setSize(400, 400);
+		myFrame.setSize(325, 325);
+		myFrame.setResizable(false);
 
+		
 		MyPanel myPanel = new MyPanel();
 		myFrame.add(myPanel);
 

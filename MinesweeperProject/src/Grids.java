@@ -1,8 +1,5 @@
 import java.awt.Color;
-import java.awt.Graphics;
 
-import javax.swing.JLabel;
-import javax.swing.border.LineBorder;
 
 public class Grids {
 private int x;
@@ -64,7 +61,7 @@ private  int y;
 			 System.out.println(" Mines around " + gridX + " ,  " + gridY + " = " +  minecounter);
 			 if(minecounter != 0){
 				 System.out.println(" Print Numer of Mines JLabel");
-
+				 MyPanel.minesArray[gridX][gridY] = minecounter;
 				 
 			 }
 			 else{			 
@@ -114,6 +111,7 @@ private  int y;
 						 }
 						 if(minecounter2 != 0){
 							 System.out.println(" Mines2 around " + grid2X + " , " + grid2Y + " = " +  minecounter2);
+							 MyPanel.minesArray[grid2X][grid2Y] = minecounter2;
 						 }
 						 else{
 							 System.out.println("Call NeighborGrids Again");
