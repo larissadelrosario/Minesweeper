@@ -11,12 +11,14 @@ private  int y;
 		 x = gridX;
 		 y = gridY;
 }
+
 	//Method 
 	public void CheckGrid(MyPanel one){
 		int gridX = x;
 		int gridY = y;
 		
-	if(MyPanel.statusArray[gridX][gridY] == 0){
+		//Check if the grid has a mine
+		if(MyPanel.statusArray[gridX][gridY] == 0){
 		MyPanel.statusArray[gridX][gridY] = 1;
 		if(MyPanel.MineArray[x][y] == 0 || MyPanel.MineArray [x][y]==1){
 			 
@@ -35,11 +37,11 @@ private  int y;
 					}
 				 } 
 			 }	 
-			 
-			 
+			 	 
 		// Game Over
 		}
 		else{
+			// Check the number of neighbor mines 
 			MyPanel.colorArray[gridX][gridY] = Color.GRAY;
 			one.repaint();
 			int minecounter=0;
@@ -47,7 +49,6 @@ private  int y;
 			 for(int i = -1; i <= 1; i++){
 				 for(int u = -1; u <= 1; u++){
 					 
-				 	//if( MyPanel.MineArray[gridX-1+i][gridY-1+u]==0 || MyPanel.MineArray[gridX-1+i][gridY-1+u]==1  )
 					if(gridX+i>=0 && gridY+u>=0 && gridX+i<MyPanel.TOTAL_COLUMNS && gridY+u<MyPanel.TOTAL_ROWS) {
 					  if( MyPanel.MineArray[gridX+i][gridY+u]==0 || MyPanel.MineArray[gridX+i][gridY+u]==1 )	{
 						 minecounter = minecounter + 1;
@@ -58,19 +59,22 @@ private  int y;
 				 }
 				 
 			 }
+			 
 			 System.out.println(" Mines around " + gridX + " ,  " + gridY + " = " +  minecounter);
 			 if(minecounter != 0){
+				 // If the number of neighbor mines is greater than 0, Log the Number & Continue
 				 System.out.println(" Print Numer of Mines JLabel");
 				 MyPanel.minesArray[gridX][gridY] = minecounter;
-				 
 			 }
-			 else{			 
+			 else{	
+				 // If the number mines is equal to 0, get the number of mines for neighbor grids
 				 System.out.println(" Execute NeighbordGrids ");
 				 this.NeighborGrids(one);
 			 }
 		}
 	  }
 	}
+	
 	public void NeighborGrids(MyPanel two){
 		int grid2X;
 		int grid2Y;
@@ -81,16 +85,14 @@ private  int y;
 				 grid2Y = y + u;
 				 System.out.println(" Grid1 Axis " + grid2X + " " + grid2Y);
 				
-			  
+			  // Check the content of the neighbor mines
 			  if (grid2X >= 0 && grid2X < MyPanel.TOTAL_COLUMNS && grid2Y >= 0 && grid2Y < MyPanel.TOTAL_ROWS)
 			  {
 				 if(MyPanel.statusArray[grid2X][grid2Y] == 0){
 					 MyPanel.statusArray[grid2X][grid2Y] = 1;
 					 System.out.println(" Grid1 Values " + MyPanel.MineArray[grid2X][grid2Y]);
 					 if (MyPanel.MineArray[grid2X][grid2Y] == 0 || MyPanel.MineArray[grid2X][grid2Y] == 1){
-						 System.out.println("NeighbordGrids Grid Value BLACK");
-						 MyPanel.colorArray[grid2X][grid2Y] = Color.BLACK;
-						 //two.repaint();
+						 System.out.println("One Neighbor Mine Found");
 						 //Do Nothing
 					 }
 					 else{
@@ -110,10 +112,12 @@ private  int y;
 							 }		 
 						 }
 						 if(minecounter2 != 0){
+							// If the number of neighbor mines is greater than 0, Log the Number & Continue
 							 System.out.println(" Mines2 around " + grid2X + " , " + grid2Y + " = " +  minecounter2);
 							 MyPanel.minesArray[grid2X][grid2Y] = minecounter2;
 						 }
 						 else{
+							// If the number of mines is equal to 0, recall the function for this Grid
 							 System.out.println("Call NeighborGrids Again");
 							 Grids nextGrids = new Grids(grid2X, grid2Y);
 							 nextGrids.NeighborGrids(two);	 

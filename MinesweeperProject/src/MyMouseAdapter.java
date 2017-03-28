@@ -62,6 +62,7 @@ public class MyMouseAdapter extends MouseAdapter {
 			break;
 		}
 	}
+
 	public void mouseReleased(MouseEvent e) {
 
 		switch (e.getButton()) {
