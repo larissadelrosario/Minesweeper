@@ -148,7 +148,7 @@ public class MyPanel extends JPanel {
 		
 		for (int i = 0; i < TOTAL_COLUMNS; i++) {
 			for (int u = 0; u < TOTAL_ROWS; u++) {
-				MineArray[i][u] = generator.nextInt(9);
+				MineArray[i][u] = generator.nextInt(12);
 				
 			}
 		}
